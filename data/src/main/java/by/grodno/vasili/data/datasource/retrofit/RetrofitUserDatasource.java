@@ -16,11 +16,11 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * {@link UserDatasource} implementation for work with Firebase realtime database
+ * {@link UserDatasource} implementation for work with Github API via Retrofit
  */
 public class RetrofitUserDatasource implements UserDatasource {
-    private final UserApiService userApiService;
     private static final String BASE_URL = "https://api.github.com/";
+    private final UserApiService userApiService;
 
     public RetrofitUserDatasource() {
         this.userApiService = new Retrofit.Builder()
@@ -41,7 +41,6 @@ public class RetrofitUserDatasource implements UserDatasource {
     public Maybe<UserResponse> one(String username) {
         return userApiService.getUser(username);
     }
-
 
     @NotNull
     private RxJava2CallAdapterFactory buildRxJavaAdapterFactory() {
