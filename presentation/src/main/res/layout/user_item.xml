@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="user"
+            type="by.grodno.vasili.githubsimpleapp.model.UserItem"
+            />
+
+        <variable
+            name="handler"
+            type="by.grodno.vasili.githubsimpleapp.feature.users.UsersActivity"
+            />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardUseCompatPadding="true"
+        style="@style/userItemStyle"
+        android:onClick="@{() -> handler.onItemClick(user.name)}"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            >
+
+            <ImageView
+                android:id="@+id/avatar_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/avatar_placeholder_image"
+                />
+
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/avatar_image"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{user.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tool:text="asdfv"
+                />
+
+            <TextView
+                android:id="@+id/id_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_label"
+                android:text="@{user.id}"
+                tool:text="6877292"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>

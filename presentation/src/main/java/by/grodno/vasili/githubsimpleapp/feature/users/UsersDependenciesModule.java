@@ -8,6 +8,9 @@ import by.grodno.vasili.githubsimpleapp.model.UserItemMapper;
 import by.grodno.vasili.githubsimpleapp.thread.IOThread;
 import by.grodno.vasili.githubsimpleapp.thread.UIThread;
 
+/**
+ * Dependency factory for {@link UsersActivity}
+ */
 class UsersDependenciesModule {
     private final UsersViewModelFactory factory;
 

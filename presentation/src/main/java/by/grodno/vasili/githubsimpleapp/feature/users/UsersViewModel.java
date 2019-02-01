@@ -46,14 +46,17 @@ class UsersViewModel extends ViewModel {
         getUsersUseCase.execute(observer, GetUsersUseCase.Params.create(since));
     }
 
+    /**
+     * Instantiate if needed and return users LiveData
+     */
+    MutableLiveData<List<UserItem>> getUsersLiveData() {
+        usersLiveData = defaultIfNull(usersLiveData, new MutableLiveData<>());
+        return usersLiveData;
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();
         getUsersUseCase.dispose();
-    }
-
-    MutableLiveData<List<UserItem>> getUsersLiveData() {
-        usersLiveData = defaultIfNull(usersLiveData, new MutableLiveData<>());
-        return usersLiveData;
     }
 }

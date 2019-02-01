@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
 import by.grodno.vasili.domain.interactor.GetUsersUseCase;
 import by.grodno.vasili.githubsimpleapp.model.UserItemMapper;
 
+/**
+ * ViewModel factory for {@link UsersActivity}
+ */
 class UsersViewModelFactory implements ViewModelProvider.Factory {
     private final GetUsersUseCase getUsersUseCase;
     private final UserItemMapper mapper;

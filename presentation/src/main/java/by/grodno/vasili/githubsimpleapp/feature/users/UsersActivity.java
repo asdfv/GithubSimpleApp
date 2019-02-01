@@ -2,25 +2,48 @@ package by.grodno.vasili.githubsimpleapp.feature.users;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
 
 import by.grodno.vasili.githubsimpleapp.R;
+import by.grodno.vasili.githubsimpleapp.databinding.ActivityUsersBinding;
+import by.grodno.vasili.githubsimpleapp.feature.base.BaseActivity;
 
-public class UsersActivity extends AppCompatActivity {
+/**
+ * Activity represent list of Users
+ */
+public class UsersActivity extends BaseActivity<ActivityUsersBinding> {
     private UsersDependenciesModule dependencies;
     private UsersViewModel model;
-    private TextView label;
+    private UsersAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_list);
-        label = findViewById(R.id.label);
         dependencies = new UsersDependenciesModule();
-
+        adapter = new UsersAdapter();
         model = ViewModelProviders.of(this, dependencies.getFactory()).get(UsersViewModel.class);
-        model.getUsersLiveData().observe(this, users -> label.setText(String.valueOf(users.size())));
+
+        initRecyclerView(adapter);
+
+        model.getUsersLiveData().observe(this, adapter::setItems);
         model.loadUsers(6877291);
+    }
+
+    /**
+     * Handler for click on recycler view item
+     * @param username Username of user in recycler view item
+     */
+    public void onItemClick(String username) {
+        showToast(username);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_users;
+    }
+
+    private void initRecyclerView(UsersAdapter adapter) {
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setAdapter(adapter);
     }
 }
