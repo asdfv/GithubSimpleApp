@@ -1,9 +1,13 @@
 package by.grodno.vasili.githubsimpleapp.model;
 
 public class UserItem {
-    String avatarUrl;
+    public String id;
+    public String name;
+    public String avatarUrl;
 
-    public UserItem(String avatarUrl) {
+    UserItem(String id, String name, String avatarUrl) {
+        this.id = id;
+        this.name = name;
         this.avatarUrl = avatarUrl;
     }
 }
