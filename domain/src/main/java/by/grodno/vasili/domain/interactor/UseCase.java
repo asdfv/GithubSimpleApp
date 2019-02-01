@@ -4,7 +4,7 @@ import io.reactivex.disposables.CompositeDisposable;
 
 
 /**
- * Abstract class for a Use Case.
+ * Abstract base class for a Use Case.
  */
 abstract class UseCase<T, Param> {
     /**

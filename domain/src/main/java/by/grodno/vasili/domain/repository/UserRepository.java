@@ -19,6 +19,7 @@ public interface UserRepository {
 
     /**
      * Takes all {@link User}`s from datasource
+     * @param since The integer ID of the last User that you've seen
      * @return list of {@link User}
      */
     Single<List<User>> getAll(int since);

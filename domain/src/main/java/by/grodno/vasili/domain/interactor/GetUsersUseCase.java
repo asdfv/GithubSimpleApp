@@ -1,23 +1,26 @@
 package by.grodno.vasili.domain.interactor;
 
+
+import java.util.List;
+
 import by.grodno.vasili.domain.model.User;
 import by.grodno.vasili.domain.repository.UserRepository;
 import by.grodno.vasili.domain.threads.PostExecutionThread;
 import by.grodno.vasili.domain.threads.SubscriberThread;
-import io.reactivex.Maybe;
+import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableMaybeObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 
 /**
- * Use case for retrieving one {@link User} from repository
+ * Use case retrieving users list from repository
  */
-public class GetUserUseCase extends UseCase<DisposableMaybeObserver<User>, GetUserUseCase.Params> {
+public class GetUsersUseCase extends UseCase<DisposableSingleObserver<List<User>>, GetUsersUseCase.Params> {
     private final SubscriberThread subscriberThread;
     private final PostExecutionThread postExecutionThread;
     private final UserRepository repository;
     private final CompositeDisposable disposables;
 
-    public GetUserUseCase(SubscriberThread subscriberThread, PostExecutionThread postExecutionThread, UserRepository repository) {
+    public GetUsersUseCase(SubscriberThread subscriberThread, PostExecutionThread postExecutionThread, UserRepository repository) {
         this.subscriberThread = subscriberThread;
         this.postExecutionThread = postExecutionThread;
         this.repository = repository;
@@ -30,25 +33,25 @@ public class GetUserUseCase extends UseCase<DisposableMaybeObserver<User>, GetUs
     }
 
     @Override
-    public void execute(DisposableMaybeObserver<User> observer, Params params) {
-        final Maybe<User> observable = repository.getOne(params.username)
+    public void execute(DisposableSingleObserver<List<User>> observer, Params params) {
+        final Single<List<User>> observable = repository.getAll(params.since)
                 .subscribeOn(subscriberThread.getScheduler())
                 .observeOn(postExecutionThread.getScheduler());
         disposables.add(observable.subscribeWith(observer));
     }
 
     /**
-     * Parameters for request one user from repository
+     * Parameters for request users list from repository
      */
     public static final class Params {
-        private final String username;
+        private final int since;
 
-        private Params(String username) {
-            this.username = username;
+        private Params(int since) {
+            this.since = since;
         }
 
-        public static Params create(String username) {
-            return new Params(username);
+        public static GetUsersUseCase.Params create(int since) {
+            return new GetUsersUseCase.Params(since);
         }
     }
 }
