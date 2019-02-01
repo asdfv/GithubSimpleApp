@@ -12,11 +12,13 @@ import io.reactivex.Single;
 public interface UserDatasource {
     /**
      * Take all
+     * @param since The integer ID of the last User that you've seen.
      */
     Single<List<UserResponse>> all(int since);
 
     /**
-     * Take by id
+     * Take user by username
+     * @param username Username of user
      */
     Maybe<UserResponse> one(String username);
 }
