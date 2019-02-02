@@ -23,7 +23,7 @@
         style="@style/userItemStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> handler.onItemClick(user.name)}"
+        android:onClick="@{() -> handler.onItemClick(user.login)}"
         card_view:cardUseCompatPadding="true"
         >
 
@@ -50,7 +50,7 @@
                 android:layout_toStartOf="@id/avatar_image"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{user.name}"
+                android:text="@{user.login}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 tool:text="asdfv"
                 />

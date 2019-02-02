@@ -7,6 +7,6 @@ import com.google.gson.annotations.SerializedName;
  */
 public class UserResponse {
     String id;
-    @SerializedName("login") String name;
+    String login;
     @SerializedName("avatar_url") String avatarUrl;
 }

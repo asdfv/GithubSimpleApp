@@ -2,12 +2,12 @@ package by.grodno.vasili.domain.model;
 
 public class User {
     public String id;
-    public String name;
+    public String login;
     public String avatarUrl;
 
-    public User(String id, String name, String avatarUrl) {
+    public User(String id, String login, String avatarUrl) {
         this.id = id;
-        this.name = name;
+        this.login = login;
         this.avatarUrl = avatarUrl;
     }
 }

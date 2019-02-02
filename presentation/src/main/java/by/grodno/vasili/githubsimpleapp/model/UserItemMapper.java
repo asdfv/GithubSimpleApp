@@ -9,6 +9,6 @@ import by.grodno.vasili.domain.model.User;
 public class UserItemMapper extends Mapper<User, UserItem> {
     @Override
     public UserItem map(User user) {
-        return new UserItem(user.id, user.name, user.avatarUrl);
+        return new UserItem(user.id, user.login, user.avatarUrl);
     }
 }
