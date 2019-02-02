@@ -24,6 +24,7 @@ ext {
     comAndroidSupportVersion = "28.0.0"
     daggerVersion = "2.19"
     apacheCommonLangVersion = "3.8.1"
+    androidArchLifecycleVersion = "1.1.1"
 }
 
 allprojects {
