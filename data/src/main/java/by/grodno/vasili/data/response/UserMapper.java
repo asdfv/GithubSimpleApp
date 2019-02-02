@@ -8,7 +8,17 @@ import by.grodno.vasili.domain.model.User;
  */
 public class UserMapper extends Mapper<UserResponse, User> {
     @Override
-    public User map(UserResponse userResponse) {
-        return new User(userResponse.id, userResponse.login, userResponse.avatarUrl);
+    public User map(UserResponse response) {
+        return new User(
+                response.id,
+                response.login,
+                response.name,
+                response.avatarUrl,
+                response.email,
+                response.organizationsUrl,
+                response.followingCount,
+                response.followersCount,
+                response.created
+        );
     }
 }

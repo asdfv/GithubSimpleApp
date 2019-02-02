@@ -1,4 +1,4 @@
-package by.grodno.vasili.githubsimpleapp.model;
+package by.grodno.vasili.githubsimpleapp.feature.users;
 
 import by.grodno.vasili.domain.mapper.Mapper;
 import by.grodno.vasili.domain.model.User;

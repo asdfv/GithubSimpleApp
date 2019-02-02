@@ -12,7 +12,6 @@ import java.util.List;
 
 import by.grodno.vasili.githubsimpleapp.R;
 import by.grodno.vasili.githubsimpleapp.databinding.UserItemBinding;
-import by.grodno.vasili.githubsimpleapp.model.UserItem;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
     private List<UserItem> items;

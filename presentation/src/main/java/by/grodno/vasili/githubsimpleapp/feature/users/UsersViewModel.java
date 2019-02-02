@@ -7,8 +7,6 @@ import java.util.List;
 
 import by.grodno.vasili.domain.interactor.GetUsersUseCase;
 import by.grodno.vasili.domain.model.User;
-import by.grodno.vasili.githubsimpleapp.model.UserItem;
-import by.grodno.vasili.githubsimpleapp.model.UserItemMapper;
 import io.reactivex.observers.DisposableSingleObserver;
 import timber.log.Timber;
 

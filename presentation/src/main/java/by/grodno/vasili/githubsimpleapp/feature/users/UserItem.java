@@ -1,5 +1,8 @@
-package by.grodno.vasili.githubsimpleapp.model;
+package by.grodno.vasili.githubsimpleapp.feature.users;
 
+/**
+ * User model for presentation in list of Users
+ */
 public class UserItem {
     public String id;
     public String login;

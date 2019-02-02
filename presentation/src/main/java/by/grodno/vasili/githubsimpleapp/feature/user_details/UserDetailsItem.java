@@ -1,6 +1,9 @@
-package by.grodno.vasili.domain.model;
+package by.grodno.vasili.githubsimpleapp.feature.user_details;
 
-public class User {
+/**
+ * User model for representing in details activity
+ */
+class UserDetailsItem {
     public String id;
     public String login;
     public String name;
@@ -11,7 +14,7 @@ public class User {
     public Integer followersCount;
     public String created;
 
-    public User(String id, String login, String name, String avatarUrl, String email, String organizationsUrl, Integer followingCount, Integer followersCount, String created) {
+    UserDetailsItem(String id, String login, String name, String avatarUrl, String email, String organizationsUrl, Integer followingCount, Integer followersCount, String created) {
         this.id = id;
         this.login = login;
         this.name = name;

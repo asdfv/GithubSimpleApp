@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 import by.grodno.vasili.domain.interactor.GetUsersUseCase;
-import by.grodno.vasili.githubsimpleapp.model.UserItemMapper;
 
 /**
  * ViewModel factory for {@link UsersActivity}

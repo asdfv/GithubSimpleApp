@@ -10,7 +10,7 @@
 
         <variable
             name="user"
-            type="by.grodno.vasili.githubsimpleapp.model.UserItem"
+            type="by.grodno.vasili.githubsimpleapp.feature.users.UserItem"
             />
 
         <variable

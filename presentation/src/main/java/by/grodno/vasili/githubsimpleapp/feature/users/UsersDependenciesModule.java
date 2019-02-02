@@ -4,7 +4,6 @@ import by.grodno.vasili.data.datasource.retrofit.RetrofitUserDatasource;
 import by.grodno.vasili.data.repository.UserDataRepository;
 import by.grodno.vasili.data.response.UserMapper;
 import by.grodno.vasili.domain.interactor.GetUsersUseCase;
-import by.grodno.vasili.githubsimpleapp.model.UserItemMapper;
 import by.grodno.vasili.githubsimpleapp.thread.IOThread;
 import by.grodno.vasili.githubsimpleapp.thread.UIThread;
 
