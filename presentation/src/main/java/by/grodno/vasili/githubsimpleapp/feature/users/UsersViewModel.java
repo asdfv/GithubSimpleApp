@@ -10,19 +10,18 @@ import by.grodno.vasili.domain.model.User;
 import io.reactivex.observers.DisposableSingleObserver;
 import timber.log.Timber;
 
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
-
 /**
  * View model for activity witch present list of users
  */
 class UsersViewModel extends ViewModel {
     private final GetUsersUseCase getUsersUseCase;
     private final UserItemMapper mapper;
-    private MutableLiveData<List<UserItem>> usersLiveData;
+    private final MutableLiveData<List<UserItem>> liveData;
 
     UsersViewModel(GetUsersUseCase getUsersUseCase, UserItemMapper mapper) {
         this.getUsersUseCase = getUsersUseCase;
         this.mapper = mapper;
+        liveData = new MutableLiveData<>();
     }
 
     /**
@@ -33,7 +32,7 @@ class UsersViewModel extends ViewModel {
         DisposableSingleObserver<List<User>> observer = new DisposableSingleObserver<List<User>>() {
             @Override
             public void onSuccess(List<User> users) {
-                usersLiveData.setValue(mapper.mapList(users));
+                liveData.setValue(mapper.mapList(users));
             }
 
             @Override
@@ -44,12 +43,8 @@ class UsersViewModel extends ViewModel {
         getUsersUseCase.execute(observer, GetUsersUseCase.Params.create(since));
     }
 
-    /**
-     * Instantiate if needed and return users LiveData
-     */
-    MutableLiveData<List<UserItem>> getUsersLiveData() {
-        usersLiveData = defaultIfNull(usersLiveData, new MutableLiveData<>());
-        return usersLiveData;
+    MutableLiveData<List<UserItem>> getLiveData() {
+        return liveData;
     }
 
     @Override

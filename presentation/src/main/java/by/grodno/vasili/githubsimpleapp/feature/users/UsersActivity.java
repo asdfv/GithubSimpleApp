@@ -26,8 +26,8 @@ public class UsersActivity extends BaseActivity<ActivityUsersBinding> {
         adapter = new UsersAdapter();
         model = ViewModelProviders.of(this, dependencies.getFactory()).get(UsersViewModel.class);
         initRecyclerView(adapter);
-        model.getUsersLiveData().observe(this, adapter::setItems);
-        model.loadUsers(6877291);
+        model.getLiveData().observe(this, adapter::setItems);
+        model.loadUsers(6877291); // TODO pagination
     }
 
     /**
