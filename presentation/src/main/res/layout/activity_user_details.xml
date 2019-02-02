@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <import type="java.lang.Integer" />
+
+        <variable
+            name="user"
+            type="by.grodno.vasili.githubsimpleapp.feature.user_details.UserDetailsItem"
+            />
+    </data>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/avatar_image"
+                android:src="@drawable/avatar_placeholder_image"
+                app:imageUrl="@{user.avatarUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/id_label"
+                />
+
+            <TextView
+                android:id="@+id/id_label"
+                style="@style/details_label"
+                android:text="@string/id"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/id_text"
+                style="@style/details_text"
+                android:text="@{user.id}"
+                app:layout_constraintStart_toStartOf="@id/id_label"
+                app:layout_constraintTop_toBottomOf="@id/id_label"
+                tools:text="_sdfDsds131-"
+                />
+
+            <TextView
+                android:id="@+id/login_label"
+                style="@style/details_label"
+                android:text="@string/login"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_text"
+                />
+
+            <TextView
+                android:id="@+id/login_text"
+                style="@style/details_text"
+                android:text="@{user.login}"
+                app:layout_constraintStart_toStartOf="@id/id_label"
+                app:layout_constraintTop_toBottomOf="@id/login_label"
+                tools:text="asdfv"
+                />
+
+            <TextView
+                android:id="@+id/name_label"
+                style="@style/details_label"
+                android:text="@string/name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/login_text"
+                />
+
+            <TextView
+                android:id="@+id/name_text"
+                style="@style/details_text"
+                android:text='@{user.name ?? "not specified"}'
+                app:layout_constraintStart_toStartOf="@id/id_label"
+                app:layout_constraintTop_toBottomOf="@id/name_label"
+                tools:text="Vasili"
+                />
+
+            <TextView
+                android:id="@+id/email_label"
+                style="@style/details_label"
+                android:text="@string/email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name_text"
+                />
+
+            <TextView
+                android:id="@+id/email_text"
+                style="@style/details_text"
+                android:text='@{user.email ?? "not specified"}'
+                app:layout_constraintStart_toStartOf="@id/id_label"
+                app:layout_constraintTop_toBottomOf="@id/email_label"
+                tools:text="supermail@grodno.by"
+                />
+
+            <TextView
+                android:id="@+id/organization_label"
+                style="@style/details_label"
+                android:text="@string/organizations"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email_text"
+                />
+
+            <TextView
+                android:id="@+id/organization_text"
+                style="@style/details_text"
+                android:text="TODO"
+                app:layout_constraintStart_toStartOf="@id/id_label"
+                app:layout_constraintTop_toBottomOf="@id/organization_label"
+                tools:text="Goozix the Best"
+                />
+
+            <TextView
+                android:id="@+id/following_label"
+                style="@style/details_label"
+                android:text="@string/followings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/organization_text"
+                />
+
+            <TextView
+                android:id="@+id/following_text"
+                style="@style/details_text"
+                android:text="@{Integer.toString(safeUnbox(user.followingCount))}"
+                app:layout_constraintStart_toStartOf="@id/id_label"
+                app:layout_constraintTop_toBottomOf="@id/following_label"
+                tools:text="1999"
+                />
+
+            <TextView
+                android:id="@+id/followers_label"
+                style="@style/details_label"
+                android:text="@string/followers"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/following_text"
+                />
+
+            <TextView
+                android:id="@+id/followers_text"
+                style="@style/details_text"
+                android:text="@{Integer.toString(safeUnbox(user.followersCount))}"
+                app:layout_constraintStart_toStartOf="@id/id_label"
+                app:layout_constraintTop_toBottomOf="@id/followers_label"
+                tools:text="0"
+                />
+
+            <TextView
+                android:id="@+id/created_label"
+                style="@style/details_label"
+                android:text="@string/created_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/followers_text"
+                />
+
+            <TextView
+                android:id="@+id/created_text"
+                style="@style/details_text"
+                android:text="@{user.created}"
+                app:layout_constraintStart_toStartOf="@id/id_label"
+                app:layout_constraintTop_toBottomOf="@id/created_label"
+                tools:text="2014-03-06T21:24:48Z"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</layout>

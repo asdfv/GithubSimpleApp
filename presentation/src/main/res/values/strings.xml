@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GithubSimpleApp</string>
+    <string name="avatar_image">Avatar image</string>
+    <string name="created_date">Created date</string>
+    <string name="email">Email</string>
+    <string name="id">ID</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="organizations">Organizations</string>
+    <string name="followings">Followings</string>
+    <string name="followers">Followers</string>
 </resources>

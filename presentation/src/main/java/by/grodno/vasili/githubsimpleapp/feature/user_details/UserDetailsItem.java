@@ -3,7 +3,7 @@ package by.grodno.vasili.githubsimpleapp.feature.user_details;
 /**
  * User model for representing in details activity
  */
-class UserDetailsItem {
+public class UserDetailsItem {
     public String id;
     public String login;
     public String name;

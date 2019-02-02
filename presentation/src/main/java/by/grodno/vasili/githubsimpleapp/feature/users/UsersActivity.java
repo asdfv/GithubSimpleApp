@@ -1,12 +1,15 @@
 package by.grodno.vasili.githubsimpleapp.feature.users;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
 import by.grodno.vasili.githubsimpleapp.R;
 import by.grodno.vasili.githubsimpleapp.databinding.ActivityUsersBinding;
 import by.grodno.vasili.githubsimpleapp.feature.base.BaseActivity;
+import by.grodno.vasili.githubsimpleapp.feature.user_details.UserDetailsActivity;
+import timber.log.Timber;
 
 /**
  * Activity represent list of Users
@@ -22,19 +25,24 @@ public class UsersActivity extends BaseActivity<ActivityUsersBinding> {
         dependencies = new UsersDependenciesModule();
         adapter = new UsersAdapter();
         model = ViewModelProviders.of(this, dependencies.getFactory()).get(UsersViewModel.class);
-
         initRecyclerView(adapter);
-
         model.getUsersLiveData().observe(this, adapter::setItems);
         model.loadUsers(6877291);
     }
 
     /**
      * Handler for click on recycler view item
-     * @param username Username of user in recycler view item
+     * @param login Login of user in recycler view item
      */
-    public void onItemClick(String username) {
-        showToast(username);
+    public void onItemClick(String login) {
+        if (login == null) {
+            showToast("Sorry, we can`t show you this user details");
+            Timber.e("Empty login in recycler view");
+            return;
+        }
+        Intent intent = new Intent(this, UserDetailsActivity.class);
+        intent.putExtra(UserDetailsActivity.LOGIN_KEY, login);
+        startActivity(intent);
     }
 
     @Override
