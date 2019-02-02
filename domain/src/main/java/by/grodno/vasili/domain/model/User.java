@@ -11,7 +11,17 @@ public class User {
     public Integer followersCount;
     public String created;
 
-    public User(String id, String login, String name, String avatarUrl, String email, String organizationsUrl, Integer followingCount, Integer followersCount, String created) {
+    public User(
+            String id,
+            String login,
+            String name,
+            String avatarUrl,
+            String email,
+            String organizationsUrl,
+            Integer followingCount,
+            Integer followersCount,
+            String created
+    ) {
         this.id = id;
         this.login = login;
         this.name = name;

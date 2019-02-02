@@ -31,7 +31,7 @@ public class GetUserUseCase extends UseCase<DisposableMaybeObserver<User>, GetUs
 
     @Override
     public void execute(DisposableMaybeObserver<User> observer, Params params) {
-        final Maybe<User> observable = repository.getOne(params.username)
+        final Maybe<User> observable = repository.getOne(params.login)
                 .subscribeOn(subscriberThread.getScheduler())
                 .observeOn(postExecutionThread.getScheduler());
         disposables.add(observable.subscribeWith(observer));
@@ -41,14 +41,14 @@ public class GetUserUseCase extends UseCase<DisposableMaybeObserver<User>, GetUs
      * Parameters for request one user from repository
      */
     public static final class Params {
-        private final String username;
+        private final String login;
 
-        private Params(String username) {
-            this.username = username;
+        private Params(String login) {
+            this.login = login;
         }
 
-        public static Params create(String username) {
-            return new Params(username);
+        public static Params create(String login) {
+            return new Params(login);
         }
     }
 }
