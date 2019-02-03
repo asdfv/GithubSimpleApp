@@ -1,28 +1,24 @@
 package by.grodno.vasili.githubsimpleapp.feature.users;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
 import by.grodno.vasili.githubsimpleapp.R;
 import by.grodno.vasili.githubsimpleapp.databinding.UserItemBinding;
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
-    private List<UserItem> items;
+/**
+ * Adapter for paginated recycler view with users
+ */
+public class UsersAdapter extends PagedListAdapter<UserItem, UsersAdapter.ViewHolder> {
 
-    UsersAdapter() {
-        this.items = new ArrayList<>();
-    }
-
-    void setItems(List<UserItem> items) {
-        this.items = items;
-        notifyDataSetChanged();
+    UsersAdapter(DiffUtil.ItemCallback<UserItem> diffUtilCallback) {
+        super(diffUtilCallback);
     }
 
     @NonNull
@@ -34,14 +30,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        UserItem item = items.get(position);
+        UserItem item = getItem(position);
         holder.binding.setUser(item);
         holder.binding.setHandler((UsersActivity) holder.itemView.getContext());
-    }
-
-    @Override
-    public int getItemCount() {
-        return items.size();
     }
 
     /**

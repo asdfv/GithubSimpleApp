@@ -3,7 +3,9 @@ package by.grodno.vasili.githubsimpleapp.feature.users;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import by.grodno.vasili.githubsimpleapp.R;
 import by.grodno.vasili.githubsimpleapp.databinding.ActivityUsersBinding;
@@ -15,19 +17,17 @@ import timber.log.Timber;
  * Activity represent list of Users
  */
 public class UsersActivity extends BaseActivity<ActivityUsersBinding> {
-    private UsersDependenciesModule dependencies;
-    private UsersViewModel model;
-    private UsersAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dependencies = new UsersDependenciesModule();
-        adapter = new UsersAdapter();
-        model = ViewModelProviders.of(this, dependencies.getFactory()).get(UsersViewModel.class);
+        UsersDependenciesModule dependencies = new UsersDependenciesModule();
+        UsersAdapter adapter = dependencies.getAdapter();
+        UsersViewModel model = ViewModelProviders.of(this, dependencies.getFactory()).get(UsersViewModel.class);
         initRecyclerView(adapter);
-        model.getLiveData().observe(this, adapter::setItems);
-        model.loadUsers(1182822); // TODO pagination
+        MutableLiveData<PagedList<UserItem>> liveData = model.getLiveData();
+        liveData.observe(this, adapter::submitList);
+        model.loadUsersAsync(liveData);
     }
 
     /**

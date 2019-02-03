@@ -1,49 +1,50 @@
 package by.grodno.vasili.githubsimpleapp.feature.users;
 
+import android.os.Handler;
+import android.os.Looper;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import java.util.List;
-
+import androidx.paging.PagedList;
 import by.grodno.vasili.domain.interactor.GetUsersUseCase;
-import by.grodno.vasili.domain.model.User;
-import io.reactivex.observers.DisposableSingleObserver;
-import timber.log.Timber;
 
 /**
  * View model for activity witch present list of users
  */
 class UsersViewModel extends ViewModel {
+    private static final int PAGE_SIZE = 10;
     private final GetUsersUseCase getUsersUseCase;
-    private final UserItemMapper mapper;
-    private final MutableLiveData<List<UserItem>> liveData;
+    private final UserItemDatasource datasource;
+    private MutableLiveData<PagedList<UserItem>> liveData;
 
-    UsersViewModel(GetUsersUseCase getUsersUseCase, UserItemMapper mapper) {
+    UsersViewModel(GetUsersUseCase getUsersUseCase, UserItemDatasource datasource) {
         this.getUsersUseCase = getUsersUseCase;
-        this.mapper = mapper;
-        liveData = new MutableLiveData<>();
+        this.datasource = datasource;
     }
 
     /**
-     * Asynchronously load Users
-     * @param since The integer ID of the last User that you've seen
+     * Create {@link PagedList} and set into liveData
      */
-    void loadUsers(int since) {
-        DisposableSingleObserver<List<User>> observer = new DisposableSingleObserver<List<User>>() {
-            @Override
-            public void onSuccess(List<User> users) {
-                liveData.setValue(mapper.mapList(users));
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Timber.e(e, "Error while retrieving Users");
-            }
-        };
-        getUsersUseCase.execute(observer, GetUsersUseCase.Params.create(since));
+    void loadUsersAsync(MutableLiveData<PagedList<UserItem>> liveData) {
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPageSize(PAGE_SIZE)
+                .build();
+        PagedList<UserItem> pagedList = new PagedList.Builder<>(datasource, config)
+                .setNotifyExecutor(new MainThreadExecutor())
+                .setFetchExecutor(Executors.newSingleThreadExecutor())
+                .build();
+        liveData.postValue(pagedList);
     }
 
-    MutableLiveData<List<UserItem>> getLiveData() {
+    MutableLiveData<PagedList<UserItem>> getLiveData() {
+        if (liveData != null) {
+            return liveData;
+        }
+        liveData = new MutableLiveData<>();
         return liveData;
     }
 
@@ -51,5 +52,17 @@ class UsersViewModel extends ViewModel {
     protected void onCleared() {
         super.onCleared();
         getUsersUseCase.dispose();
+    }
+
+    /**
+     * Executor for run in UI thread
+     */
+    class MainThreadExecutor implements Executor {
+        private final Handler mHandler = new Handler(Looper.getMainLooper());
+
+        @Override
+        public void execute(Runnable command) {
+            mHandler.post(command);
+        }
     }
 }

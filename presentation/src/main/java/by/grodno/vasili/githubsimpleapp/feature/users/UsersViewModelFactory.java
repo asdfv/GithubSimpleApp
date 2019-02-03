@@ -11,11 +11,11 @@ import by.grodno.vasili.domain.interactor.GetUsersUseCase;
  */
 class UsersViewModelFactory implements ViewModelProvider.Factory {
     private final GetUsersUseCase getUsersUseCase;
-    private final UserItemMapper mapper;
+    private final UserItemDatasource datasource;
 
-    UsersViewModelFactory(GetUsersUseCase getUsersUseCase, UserItemMapper mapper) {
+    UsersViewModelFactory(GetUsersUseCase getUsersUseCase, UserItemDatasource datasource) {
         this.getUsersUseCase = getUsersUseCase;
-        this.mapper = mapper;
+        this.datasource = datasource;
     }
 
     @SuppressWarnings("unchecked")
@@ -23,7 +23,7 @@ class UsersViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(UsersViewModel.class)) {
-            return (T) new UsersViewModel(getUsersUseCase, mapper);
+            return (T) new UsersViewModel(getUsersUseCase, datasource);
         }
         throw new IllegalArgumentException("Wrong ViewModel class");
     }
