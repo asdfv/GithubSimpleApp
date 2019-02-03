@@ -28,6 +28,7 @@ dependencies {
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
     annotationProcessor 'com.google.auto.value:auto-value:1.6.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
     implementation "com.squareup.retrofit2:converter-gson:2.5.0"
