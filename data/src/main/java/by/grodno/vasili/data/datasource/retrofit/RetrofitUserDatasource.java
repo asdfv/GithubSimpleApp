@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import by.grodno.vasili.data.datasource.UserDatasource;
+import by.grodno.vasili.data.response.OrganizationResponse;
 import by.grodno.vasili.data.response.UserResponse;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -40,6 +41,11 @@ public class RetrofitUserDatasource implements UserDatasource {
     @Override
     public Maybe<UserResponse> one(String username) {
         return userApiService.getUser(username);
+    }
+
+    @Override
+    public Single<List<OrganizationResponse>> organizations(String username) {
+        return userApiService.getOrganizations(username);
     }
 
     @NotNull

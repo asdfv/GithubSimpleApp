@@ -2,6 +2,7 @@ package by.grodno.vasili.githubsimpleapp.feature.users;
 
 import by.grodno.vasili.data.datasource.retrofit.RetrofitUserDatasource;
 import by.grodno.vasili.data.repository.UserDataRepository;
+import by.grodno.vasili.data.response.OrganizationMapper;
 import by.grodno.vasili.data.response.UserMapper;
 import by.grodno.vasili.domain.interactor.GetUsersUseCase;
 import by.grodno.vasili.githubsimpleapp.thread.IOThread;
@@ -14,7 +15,7 @@ class UsersDependenciesModule {
     private final UsersViewModelFactory factory;
 
     UsersDependenciesModule() {
-        GetUsersUseCase getUsersUseCase = new GetUsersUseCase(new IOThread(), new UIThread(), new UserDataRepository(new RetrofitUserDatasource(), new UserMapper()));
+        GetUsersUseCase getUsersUseCase = new GetUsersUseCase(new IOThread(), new UIThread(), new UserDataRepository(new RetrofitUserDatasource(), new UserMapper(), new OrganizationMapper()));
         UserItemMapper mapper = new UserItemMapper();
         factory = new UsersViewModelFactory(getUsersUseCase, mapper);
     }

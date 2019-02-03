@@ -2,6 +2,7 @@ package by.grodno.vasili.domain.repository;
 
 import java.util.List;
 
+import by.grodno.vasili.domain.model.Organization;
 import by.grodno.vasili.domain.model.User;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -23,4 +24,12 @@ public interface UserRepository {
      * @return list of {@link User}
      */
     Single<List<User>> getAll(int since);
+
+    /**
+     * Take organizations for user from datasource
+     *
+     * @param username Username of user
+     * @return Single observable list of {@link Organization}`s
+     */
+    Single<List<Organization>> getOrganizations(String username);
 }

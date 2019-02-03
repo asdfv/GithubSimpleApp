@@ -1,12 +1,14 @@
 package by.grodno.vasili.domain.model;
 
+import java.util.List;
+
 public class User {
     public String id;
     public String login;
     public String name;
     public String avatarUrl;
     public String email;
-    public String organizationsUrl;
+    public List<Organization> organizations;
     public Integer followingCount;
     public Integer followersCount;
     public String created;
@@ -17,7 +19,7 @@ public class User {
             String name,
             String avatarUrl,
             String email,
-            String organizationsUrl,
+            List<Organization> organizations,
             Integer followingCount,
             Integer followersCount,
             String created
@@ -27,7 +29,7 @@ public class User {
         this.name = name;
         this.avatarUrl = avatarUrl;
         this.email = email;
-        this.organizationsUrl = organizationsUrl;
+        this.organizations = organizations;
         this.followingCount = followingCount;
         this.followersCount = followersCount;
         this.created = created;

@@ -7,6 +7,12 @@ import by.grodno.vasili.domain.model.User;
  * Convert {@link User} from domain-layer to {@link UserDetailsItem} in presentation-layer
  */
 public class UserDetailsItemMapper extends Mapper<User, UserDetailsItem> {
+    private final OrganizationItemMapper organizationItemMapper;
+
+    UserDetailsItemMapper(OrganizationItemMapper organizationItemMapper) {
+        this.organizationItemMapper = organizationItemMapper;
+    }
+
     @Override
     public UserDetailsItem map(User user) {
         return new UserDetailsItem(
@@ -15,7 +21,7 @@ public class UserDetailsItemMapper extends Mapper<User, UserDetailsItem> {
                 user.name,
                 user.avatarUrl,
                 user.email,
-                user.organizationsUrl,
+                organizationItemMapper.mapList(user.organizations),
                 user.followingCount,
                 user.followersCount,
                 user.created

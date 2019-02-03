@@ -2,6 +2,7 @@ package by.grodno.vasili.data.datasource.retrofit;
 
 import java.util.List;
 
+import by.grodno.vasili.data.response.OrganizationResponse;
 import by.grodno.vasili.data.response.UserResponse;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -25,4 +26,12 @@ public interface UserApiService {
      */
     @GET("users/{username}")
     Maybe<UserResponse> getUser(@Path("username") String username);
+
+    /**
+     * Get organization for user
+     * @param username Username of user
+     * @return Single observable list of {@link OrganizationResponse}
+     */
+    @GET("users/{username}/orgs")
+    Single<List<OrganizationResponse>> getOrganizations(@Path("username") String username);
 }
