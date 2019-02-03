@@ -1,8 +1,8 @@
 package by.grodno.vasili.githubsimpleapp.feature.user_details;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.support.annotation.Nullable;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.annotation.Nullable;
 
 import by.grodno.vasili.domain.interactor.GetUserUseCase;
 import by.grodno.vasili.domain.model.User;

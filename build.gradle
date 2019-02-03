@@ -6,25 +6,12 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
     }
-    subprojects {
-        project.configurations.all {
-            resolutionStrategy.eachDependency { details ->
-                if (details.requested.group == 'com.android.support'
-                        && !details.requested.name.contains('multidex') ) {
-                    details.useVersion comAndroidSupportVersion
-                }
-            }
-        }
-    }
 }
 
 ext {
     rxJavaVersion = "2.2.0"
     timberVersion = "4.7.1"
-    comAndroidSupportVersion = "28.0.0"
-    daggerVersion = "2.19"
     apacheCommonLangVersion = "3.8.1"
-    androidArchLifecycleVersion = "1.1.1"
     orgApacheCommonsVersion = "4.2"
 }
 

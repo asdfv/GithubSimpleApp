@@ -1,6 +1,6 @@
 package by.grodno.vasili.githubsimpleapp.feature.user_details;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 
 import by.grodno.vasili.githubsimpleapp.R;

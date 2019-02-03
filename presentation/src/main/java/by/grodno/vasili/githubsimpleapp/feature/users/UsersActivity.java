@@ -1,10 +1,10 @@
 package by.grodno.vasili.githubsimpleapp.feature.users;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import by.grodno.vasili.githubsimpleapp.R;
 import by.grodno.vasili.githubsimpleapp.databinding.ActivityUsersBinding;
 import by.grodno.vasili.githubsimpleapp.feature.base.BaseActivity;
