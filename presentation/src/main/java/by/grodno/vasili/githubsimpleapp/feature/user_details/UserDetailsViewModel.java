@@ -1,9 +1,8 @@
 package by.grodno.vasili.githubsimpleapp.feature.user_details;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.annotation.Nullable;
-
 import by.grodno.vasili.domain.interactor.GetUserUseCase;
 import by.grodno.vasili.domain.model.User;
 import io.reactivex.observers.DisposableMaybeObserver;
@@ -25,6 +24,7 @@ class UserDetailsViewModel extends ViewModel {
 
     /**
      * Asynchronously load user
+     *
      * @param login Login of user
      */
     void loadUserAsync(@Nullable String login) {

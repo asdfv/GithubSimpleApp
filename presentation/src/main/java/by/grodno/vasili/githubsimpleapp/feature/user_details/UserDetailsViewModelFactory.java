@@ -1,9 +1,8 @@
 package by.grodno.vasili.githubsimpleapp.feature.user_details;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
-
 import by.grodno.vasili.domain.interactor.GetUserUseCase;
 
 /**

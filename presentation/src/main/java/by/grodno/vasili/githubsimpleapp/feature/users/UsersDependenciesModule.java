@@ -14,8 +14,6 @@ import by.grodno.vasili.githubsimpleapp.thread.UIThread;
  * Dependency factory for {@link UsersActivity}
  */
 class UsersDependenciesModule {
-    private final UsersViewModelFactory factory;
-    private final UsersAdapter adapter;
     private static final DiffUtil.ItemCallback<UserItem> DIFF_CALLBACK = new DiffUtil.ItemCallback<UserItem>() {
         @Override
         public boolean areItemsTheSame(@NonNull UserItem oldItem, @NonNull UserItem newItem) {
@@ -27,7 +25,8 @@ class UsersDependenciesModule {
             return oldItem.equals(newItem);
         }
     };
-
+    private final UsersViewModelFactory factory;
+    private final UsersAdapter adapter;
 
     UsersDependenciesModule() {
         GetUsersUseCase getUsersUseCase = new GetUsersUseCase(
@@ -36,8 +35,8 @@ class UsersDependenciesModule {
                 new UserDataRepository(new RetrofitUserDatasource(), new UserMapper(), new OrganizationMapper())
         );
         UserItemMapper mapper = new UserItemMapper();
-        UserItemDatasource userItemDatasource = new UserItemDatasource(getUsersUseCase, mapper);
-        factory = new UsersViewModelFactory(getUsersUseCase, userItemDatasource);
+        UserItemDatasourceFactory datasourceFactory = new UserItemDatasourceFactory(getUsersUseCase, mapper);
+        factory = new UsersViewModelFactory(getUsersUseCase, datasourceFactory);
         adapter = new UsersAdapter(DIFF_CALLBACK);
     }
 

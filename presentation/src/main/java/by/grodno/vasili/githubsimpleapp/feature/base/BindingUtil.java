@@ -1,6 +1,5 @@
 package by.grodno.vasili.githubsimpleapp.feature.base;
 
-import androidx.databinding.BindingAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.LinkedList;
 import java.util.List;
 
+import androidx.databinding.BindingAdapter;
 import by.grodno.vasili.githubsimpleapp.feature.user_details.OrganizationItem;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;

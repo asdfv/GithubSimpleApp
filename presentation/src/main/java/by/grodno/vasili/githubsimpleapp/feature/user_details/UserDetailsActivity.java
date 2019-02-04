@@ -1,8 +1,8 @@
 package by.grodno.vasili.githubsimpleapp.feature.user_details;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 
+import androidx.lifecycle.ViewModelProviders;
 import by.grodno.vasili.githubsimpleapp.R;
 import by.grodno.vasili.githubsimpleapp.databinding.ActivityUserDetailsBinding;
 import by.grodno.vasili.githubsimpleapp.feature.base.BaseActivity;

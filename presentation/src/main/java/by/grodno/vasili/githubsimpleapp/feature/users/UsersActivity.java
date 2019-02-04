@@ -3,7 +3,9 @@ package by.grodno.vasili.githubsimpleapp.feature.users;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.lifecycle.MutableLiveData;
+import org.jetbrains.annotations.NotNull;
+
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,21 +19,22 @@ import timber.log.Timber;
  * Activity represent list of Users
  */
 public class UsersActivity extends BaseActivity<ActivityUsersBinding> {
+    private UsersViewModel model;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UsersDependenciesModule dependencies = new UsersDependenciesModule();
         UsersAdapter adapter = dependencies.getAdapter();
-        UsersViewModel model = ViewModelProviders.of(this, dependencies.getFactory()).get(UsersViewModel.class);
+        model = ViewModelProviders.of(this, dependencies.getFactory()).get(UsersViewModel.class);
         initRecyclerView(adapter);
-        MutableLiveData<PagedList<UserItem>> liveData = model.getLiveData();
-        liveData.observe(this, adapter::submitList);
-        model.loadUsersAsync(liveData);
+        initPullToRefresh();
+        model.initAndGetPagedListLiveData().observe(this, stopRefreshAndSubmitPageList(adapter));
     }
 
     /**
      * Handler for click on recycler view item
+     *
      * @param login Login of user in recycler view item
      */
     public void onItemClick(String login) {
@@ -53,5 +56,17 @@ public class UsersActivity extends BaseActivity<ActivityUsersBinding> {
     private void initRecyclerView(UsersAdapter adapter) {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
+    }
+
+    private void initPullToRefresh() {
+        binding.refreshContainer.setOnRefreshListener(() -> model.invalidateDatasource());
+    }
+
+    @NotNull
+    private Observer<PagedList<UserItem>> stopRefreshAndSubmitPageList(UsersAdapter adapter) {
+        return pagedList -> {
+            binding.refreshContainer.setRefreshing(false);
+            adapter.submitList(pagedList);
+        };
     }
 }
