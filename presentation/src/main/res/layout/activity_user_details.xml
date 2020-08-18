@@ -113,9 +113,9 @@
             <TextView
                 android:id="@+id/organization_text"
                 style="@style/details_text"
-                app:organizations='@{user.organizations}'
                 app:layout_constraintStart_toStartOf="@id/id_label"
                 app:layout_constraintTop_toBottomOf="@id/organization_label"
+                app:organizations='@{user.organizations}'
                 tools:text="Goozix the Best"
                 />
 
