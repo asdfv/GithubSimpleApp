@@ -7,8 +7,6 @@
 
     <data>
 
-        <import type="java.lang.Integer" />
-
         <variable
             name="user"
             type="by.grodno.vasili.githubsimpleapp.feature.user_details.UserDetailsItem"
