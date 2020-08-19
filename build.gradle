@@ -1,5 +1,15 @@
 buildscript {
     ext.kotlin_version = '1.4.0'
+    ext.androidx_lifecycle_version = '2.2.0'
+    ext.getStringLocalProperty = { String name, String defaultValue = "" ->
+        def localPropertiesFile = project.rootProject.file('local.properties')
+        if (localPropertiesFile.exists()) {
+            Properties localProperties = new Properties()
+            localProperties.load(localPropertiesFile.newDataInputStream())
+            return localProperties.getProperty(name) ?: defaultValue
+        }
+        return defaultValue
+    }
     repositories {
         google()
         jcenter()
@@ -15,7 +25,6 @@ plugins {
 }
 
 ext {
-    rxJavaVersion = "2.2.0"
     timberVersion = "4.7.1"
     apacheCommonLangVersion = "3.8.1"
     orgApacheCommonsVersion = "4.2"
