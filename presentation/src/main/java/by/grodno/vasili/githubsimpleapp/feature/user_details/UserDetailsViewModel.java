@@ -13,12 +13,10 @@ import timber.log.Timber;
  */
 class UserDetailsViewModel extends ViewModel {
     private final GetUserUseCase getUserUseCase;
-    private final UserDetailsItemMapper mapper;
     private final MutableLiveData<UserDetailsItem> liveData;
 
-    UserDetailsViewModel(GetUserUseCase getUserUseCase, UserDetailsItemMapper mapper) {
+    UserDetailsViewModel(GetUserUseCase getUserUseCase) {
         this.getUserUseCase = getUserUseCase;
-        this.mapper = mapper;
         liveData = new MutableLiveData<>();
     }
 
@@ -31,7 +29,7 @@ class UserDetailsViewModel extends ViewModel {
         DisposableMaybeObserver<User> observer = new DisposableMaybeObserver<User>() {
             @Override
             public void onSuccess(User user) {
-                liveData.setValue(mapper.map(user));
+                liveData.setValue(new UserDetailsItem(user));
             }
 
             @Override

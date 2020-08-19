@@ -10,18 +10,16 @@ import by.grodno.vasili.domain.interactor.GetUsersUseCase;
  */
 public class UserItemDatasourceFactory extends DataSource.Factory<String, UserItem> {
     private final GetUsersUseCase getUsersUseCase;
-    private final UserItemMapper mapper;
     private final MutableLiveData<PageKeyedDataSource<String, UserItem>> dataSourceLiveData;
 
-    UserItemDatasourceFactory(GetUsersUseCase getUsersUseCase, UserItemMapper mapper) {
+    UserItemDatasourceFactory(GetUsersUseCase getUsersUseCase) {
         this.getUsersUseCase = getUsersUseCase;
-        this.mapper = mapper;
         dataSourceLiveData = new MutableLiveData<>();
     }
 
     @Override
     public DataSource<String, UserItem> create() {
-        UserItemDatasource datasource = new UserItemDatasource(getUsersUseCase, mapper);
+        UserItemDatasource datasource = new UserItemDatasource(getUsersUseCase);
         dataSourceLiveData.postValue(datasource);
         return datasource;
     }

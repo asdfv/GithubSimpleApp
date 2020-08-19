@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import by.grodno.vasili.data.datasource.retrofit.RetrofitUserDatasource;
 import by.grodno.vasili.data.repository.UserDataRepository;
-import by.grodno.vasili.data.response.OrganizationMapper;
-import by.grodno.vasili.data.response.UserMapper;
 import by.grodno.vasili.domain.interactor.GetUsersUseCase;
 import by.grodno.vasili.githubsimpleapp.thread.IOThread;
 import by.grodno.vasili.githubsimpleapp.thread.UIThread;
@@ -32,10 +30,9 @@ class UsersDependenciesModule {
         GetUsersUseCase getUsersUseCase = new GetUsersUseCase(
                 new IOThread(),
                 new UIThread(),
-                new UserDataRepository(new RetrofitUserDatasource(), new UserMapper(), new OrganizationMapper())
+                new UserDataRepository(new RetrofitUserDatasource())
         );
-        UserItemMapper mapper = new UserItemMapper();
-        UserItemDatasourceFactory datasourceFactory = new UserItemDatasourceFactory(getUsersUseCase, mapper);
+        UserItemDatasourceFactory datasourceFactory = new UserItemDatasourceFactory(getUsersUseCase);
         factory = new UsersViewModelFactory(getUsersUseCase, datasourceFactory);
         adapter = new UsersAdapter(DIFF_CALLBACK);
     }
